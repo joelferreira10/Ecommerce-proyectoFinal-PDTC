@@ -1,14 +1,17 @@
 
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Component,React } from 'react';
+import { render } from '@testing-library/react';
 
-function App() {
-
-  return (
+class App extends Component {
+  render() {
+    return (
     
-    <div>
-
-    </div>
-  );
+     <h1>hola joeñlSUGFIULSDHUILGHILSHGDIHGIL</h1>
+     
+    );
+  }
 }
 
 export default App;

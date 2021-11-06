@@ -1,6 +1,6 @@
-import React,{useState} from 'react';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
-import {Switch as Switchs} from 'react-router'
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { Routes} from 'react-router-dom'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,6 +20,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Avatar } from '@mui/material';
 import logo from './../home/logo.png'
 import Sidebar from './Sidebar'
+import App from '../../App'
 
 const drawerWidth = 240;
 
@@ -33,21 +34,21 @@ function Home(props) {
 
   const drawer = (
     <div>
-            <Toolbar /> 
-            <Divider />
-            {/*Crear producto*/}
-          <Link to='/'>
-            <List>
-                <ListItem button>
-                  <ListItemIcon>
-                    <AddCircleIcon fontSize="large" color="primary"/>
-                  </ListItemIcon>
-                  <ListItemText primary="Crear Producto"/>
-                </ListItem>
-            </List>
-          </Link>
-            { /*Listado de productos*/ }
-            {/* <List>
+      <Toolbar />
+      <Divider />
+      {/*Crear producto*/}
+      <Link to='/'>
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <AddCircleIcon fontSize="large" color="primary" />
+            </ListItemIcon>
+            <ListItemText primary="Crear Producto" />
+          </ListItem>
+        </List>
+      </Link>
+      { /*Listado de productos*/}
+      {/* <List>
                 <ListItem button>
                   <ListItemIcon>
                     <PlaylistAddCheckIcon fontSize="large" color="secondary"/>
@@ -64,17 +65,17 @@ function Home(props) {
                   <ListItemText primary="Lista de usuarios"/>
                 </ListItem>
             </List> */}
-            <Divider />
+      <Divider />
     </div>
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-  
+    <BrowserRouter>
     <Box sx={{ display: 'flex' }}>
-      
-      <CssBaseline/>
+
+      <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
@@ -92,74 +93,100 @@ function Home(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Avatar alt="Remy Sharp" sx={{mr:2}} src={logo} />
-          <Typography  variant="h6" noWrap component="div">
-             Bird Store  Panel Administrador 
+          <Avatar alt="Remy Sharp" sx={{ mr: 2 }} src={logo} />
+          <Typography variant="h6" noWrap component="div">
+            Bird Store  Panel Administrador
           </Typography>
         </Toolbar>
       </AppBar>
-      <Router>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* Cuando la pantalla es menor a sm */}
-        {<Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
+     
+     
+        <Box
+          component="nav"
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          aria-label="mailbox folders"
         >
-          <Sidebar/>
-        </Drawer>}
+          {/* Cuando la pantalla es menor a sm */}
+          {<Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+          >
+           <Toolbar /> 
+            <Divider />
+            {/*Crear producto*/}
+          <Link  to='home'>
+            <List>
+                <ListItem button>
+                  <ListItemIcon>
+                    <AddCircleIcon fontSize="large" color="primary"/>
+                  </ListItemIcon>
+                  <ListItemText primary="Crear Producto"/>
+                </ListItem>
+            </List>
+          </Link>
+           
+            <Divider />
+          </Drawer>}
 
           {/*Cuando la pantalla es mayor a SM */}
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-          open
+          <Drawer
+            variant="permanent"
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+            open
+          >
+      <Toolbar /> 
+            <Divider />
+            {/*Crear producto*/}
+          <Link  to='home'>
+            <List>
+                <ListItem button>
+                  <ListItemIcon>
+                    <AddCircleIcon fontSize="large" color="primary"/>
+                  </ListItemIcon>
+                  <ListItemText primary="Crear Producto"/>
+                </ListItem>
+            </List>
+          </Link>
+          
+            <Divider />
+          </Drawer>
+        </Box>
+
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
         >
-          <Sidebar/>
-        </Drawer>
-      </Box>
-      
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
-      >
-        
-        <Switchs>
-          <Route path="/" exact>
-            home
+          <div style={{width:'80%'},{marginTop:'100px'}} >
+            <Routes>
+          <Route path="home" element={<App />}>
+          
+         
+           
           </Route>
-        </Switchs>
-        
-        {/* <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
+       </Routes>
+       </div>
+      
+          </Box>
           
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim 
-          
-        </Typography>*/}
+
         
-      </Box>
-      </Router>
     
-  </Box>
+
+    </Box>
+   
+    </BrowserRouter>
   );
 }
 

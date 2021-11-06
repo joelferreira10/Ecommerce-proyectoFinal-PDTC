@@ -14,7 +14,7 @@ function Sidebar(){
             <Toolbar /> 
             <Divider />
             {/*Crear producto*/}
-          <NavLink to='/'>
+          <Link  to='home'>
             <List>
                 <ListItem button>
                   <ListItemIcon>
@@ -23,7 +23,7 @@ function Sidebar(){
                   <ListItemText primary="Crear Producto"/>
                 </ListItem>
             </List>
-          </NavLink>
+          </Link>
             { /*Listado de productos*/ }
             {/* <List>
                 <ListItem button>
